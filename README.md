@@ -281,16 +281,12 @@ GET /api/students?page=1&limit=5
 
 * Ensure MongoDB is running locally or provide a cloud URI
 * Backend must be running before frontend
-* `.env` files should never be committed
 
 ---
 
 ## 👨‍💻 Author
 
 **Gaurav Deshmukh**
-
-MERN Stack Developer | Final Year B.Tech Student
-
 ---
 
 ✅ Project is fully functional and ready for evaluation.
