@@ -14,8 +14,7 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",        // local Vite frontend
+    origin: [   
       "https://sol-9-x-mern-assignment.vercel.app" // deployed frontend 
     ],
     credentials: true
