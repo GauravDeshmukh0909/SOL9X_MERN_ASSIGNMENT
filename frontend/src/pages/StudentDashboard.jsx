@@ -20,7 +20,7 @@ const StudentDashboard = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await api.get("/students/me");
+      const res = await api.get("/api/students/me");
       setProfile(res.data);
       setFormData({
         name: res.data.name,
@@ -56,7 +56,7 @@ const StudentDashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.put("/students/me", formData);
+      await api.put("/api/students/me", formData);
       setProfile({ ...profile, ...formData });
       setIsEditing(false);
       setUpdateSuccess(true);

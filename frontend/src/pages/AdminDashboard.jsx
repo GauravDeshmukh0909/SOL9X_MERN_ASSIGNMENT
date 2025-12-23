@@ -32,7 +32,7 @@ const AdminDashboard = () => {
   const fetchStudents = async () => {
     try {
       setIsLoading(true);
-      const res = await api.get(`/students?page=${page}&limit=${limit}`);
+      const res = await api.get(`/api/students?page=${page}&limit=${limit}`);
 
       setStudents(res.data.students);
       setTotalPages(res.data.pagination.totalPages);
@@ -79,7 +79,7 @@ const AdminDashboard = () => {
   const handleDeleteStudent = async (id) => {
     if (window.confirm("Are you sure you want to delete this student?")) {
       try {
-        await api.delete(`/students/${id}`);
+        await api.delete(`/api/students/${id}`);
         fetchStudents();
       } catch (error) {
         console.error("Error deleting student:", error);
@@ -96,7 +96,7 @@ const AdminDashboard = () => {
         await api.put(`/students/${editingStudent._id}`, formData);
         alert("Student updated successfully!");
       } else {
-        const res = await api.post("/students", formData);
+        const res = await api.post("/api/students", formData);
         if (res.data?.credentials) {
           setCredentials(res.data.credentials);
 
