@@ -1,16 +1,35 @@
 import Student from "../models/student.model.js";
-import User from "../models/user.model.js"; // ✅ ADD THIS
-import bcrypt from "bcryptjs"; // ✅ ADD THIS (or "bcrypt" depending on your package)
+import User from "../models/user.model.js"; 
+import bcrypt from "bcryptjs"; 
 
 // ADMIN: Get all students
 export const getAllStudents = async (req, res) => {
   try {
-    const students = await Student.find();
-    res.json(students);
+    const page = parseInt(req.query.page) || 1;   
+    const limit = parseInt(req.query.limit) || 5; 
+    const skip = (page - 1) * limit;
+
+    const totalStudents = await Student.countDocuments();
+
+    const students = await Student.find()
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      students,
+      pagination: {
+        totalStudents,
+        totalPages: Math.ceil(totalStudents / limit),
+        currentPage: page,
+        limit,
+      },
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // STUDENT: Get own profile
 export const getMyProfile = async (req, res) => {
@@ -41,7 +60,7 @@ export const updateStudent = async (req, res) => {
   try {
     const { name, email, course, enrollmentDate } = req.body;
 
-    // 1️⃣ Update Student profile
+ 
     const student = await Student.findByIdAndUpdate(
       req.params.id,
       {
@@ -57,7 +76,7 @@ export const updateStudent = async (req, res) => {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    // 2️⃣ Sync email & name in User collection
+
     await User.findByIdAndUpdate(student.userId, {
       name,
       email
@@ -96,17 +115,17 @@ export const addStudent = async (req, res) => {
   try {
     const { name, email, course, enrollmentDate } = req.body;
 
-    // 1️⃣ Check if user already exists
+   
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Student already exists" });
     }
 
-    // 2️⃣ Default password
+    //  Default password
     const defaultPassword = "student@123";
     const hashedPassword = await bcrypt.hash(defaultPassword, 10);
 
-    // 3️⃣ Create User
+    
     const user = await User.create({
       name,
       email,
@@ -114,7 +133,7 @@ export const addStudent = async (req, res) => {
       role: "student"
     });
 
-    // 4️⃣ Create Student Profile
+    
     const student = await Student.create({
       userId: user._id,
       name,

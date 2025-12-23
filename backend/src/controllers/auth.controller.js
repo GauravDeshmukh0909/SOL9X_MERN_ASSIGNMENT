@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import Student from "../models/student.model.js";
 
-// ===================
+
 // SIGNUP
-// ===================
+
 export const signup = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -39,9 +39,9 @@ export const signup = async (req, res) => {
   }
 };
 
-// ===================
+
 // LOGIN
-// ===================
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;

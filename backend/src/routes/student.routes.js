@@ -11,8 +11,11 @@ import {
 } from "../controllers/student.controller.js";
 
 const router = express.Router();
+
+
 router.get("/me", verifyToken, isStudent, getMyProfile);
 router.put("/me", verifyToken, isStudent, updateMyProfile);
+
 
 router.get("/", verifyToken, isAdmin, getAllStudents);
 router.post("/", verifyToken, isAdmin, addStudent);

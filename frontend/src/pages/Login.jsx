@@ -7,7 +7,7 @@ const Login = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    role: "student", // default
+    role: "student", 
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -27,14 +27,14 @@ const Login = () => {
     const actualRole = res.payload.user.role;
     const selectedRole = form.role;
 
-    // 🚫 Role mismatch check
+    // Role mismatch check
     if (actualRole !== selectedRole) {
       setError(`You are not authorized to login as ${selectedRole}`);
       setIsLoading(false);
       return;
     }
 
-    // ✅ Correct role → navigate
+    // Correct role → navigate
     if (actualRole === "admin") {
       navigate("/admin");
     } else {
@@ -51,13 +51,12 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
 
-        {/* Header */}
+        
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800">Welcome Back</h2>
           <p className="text-gray-500 mt-2">Sign in to your account</p>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="mb-4 p-3 bg-red-50 text-red-600 rounded">
             {error}
@@ -66,7 +65,7 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* 🔹 Login As */}
+          
 <div>
   <label className="block text-sm font-medium text-gray-700 mb-2">
     Login As

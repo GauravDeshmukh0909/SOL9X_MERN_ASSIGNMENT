@@ -96,9 +96,9 @@ const StudentDashboard = () => {
         </div>
       </header>
 
-      {/* Main Content */}
+
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Success Message */}
+
         {updateSuccess && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
             <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,9 +108,9 @@ const StudentDashboard = () => {
           </div>
         )}
 
-        {/* Profile Card */}
+
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          {/* Profile Header */}
+
           <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-8">
             <div className="flex items-center gap-4">
               <div className="h-20 w-20 bg-white rounded-full flex items-center justify-center">
@@ -125,13 +125,13 @@ const StudentDashboard = () => {
             </div>
           </div>
 
-          {/* Profile Content */}
+
           <div className="px-6 py-8">
             {!isEditing ? (
               <div>
-                {/* View Mode */}
+
                 <div className="space-y-6">
-                  {/* Personal Information Section */}
+ 
                   <div>
                     <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                       <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,7 +151,7 @@ const StudentDashboard = () => {
                     </div>
                   </div>
 
-                  {/* Academic Information Section */}
+
                   <div className="border-t pt-6">
                     <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                       <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,7 +182,7 @@ const StudentDashboard = () => {
                   </div>
                 </div>
 
-                {/* Edit Button */}
+
                 <div className="mt-8">
                   <button
                     onClick={handleEdit}
@@ -197,7 +197,7 @@ const StudentDashboard = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
-                {/* Edit Mode */}
+
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4">Edit Your Profile</h3>
                   
@@ -235,7 +235,7 @@ const StudentDashboard = () => {
                     />
                   </div>
 
-                  {/* Action Buttons */}
+
                   <div className="flex gap-3 pt-4">
                     <button
                       type="button"
@@ -257,7 +257,6 @@ const StudentDashboard = () => {
           </div>
         </div>
 
-        {/* Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center gap-3">
