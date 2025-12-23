@@ -11,7 +11,18 @@ dotenv.config();
 const app = express();
 
 // Middlewares
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",        // local Vite frontend
+      "https://sol-9-x-mern-assignment.vercel.app" // deployed frontend 
+    ],
+    credentials: true
+  })
+);
+
+
 app.use(express.json());
 
 // Routes
