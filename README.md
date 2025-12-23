@@ -49,6 +49,17 @@ To test a candidate’s understanding of:
 * **Admin**
 * **Student**
 
+### Test Credentials
+
+  * Use the following credentials to test the Admin Dashboard and admin-level functionalities:
+  * 👨‍💼 Admin Account
+```
+        Email: admin@test.com
+
+        Password: admin123
+
+```
+
 ### ✅ Dashboards
 
 #### 👨‍💼 Admin Dashboard
