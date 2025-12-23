@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../services/api";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -8,32 +8,32 @@ const initialState = {
   error: null,
 };
 
+// 🔐 Login
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (data, thunkAPI) => {
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        data
-      );
+      const res = await api.post("/auth/login", data);
       return res.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data.message);
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Login failed"
+      );
     }
   }
 );
 
+// 📝 Signup
 export const signupUser = createAsyncThunk(
   "auth/signup",
   async (data, thunkAPI) => {
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        data
-      );
+      const res = await api.post("/auth/signup", data);
       return res.data;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data.message);
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Signup failed"
+      );
     }
   }
 );
@@ -45,13 +45,17 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.clear();
+      state.error = null;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
     builder
+      // LOGIN
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -65,8 +69,11 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
+      // SIGNUP
       .addCase(signupUser.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(signupUser.fulfilled, (state) => {
         state.loading = false;
